@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Chyron 4100 Emulator</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@400;700;900&family=Barlow+Condensed:wght@500;600;800&family=Oswald:wght@600&family=Roboto+Slab:wght@700&family=VT323&display=swap">
+<link rel="stylesheet" href="chyron.css">
+</head>
+<body>
+<div class="rack">
+  <header class="plate">
+    <div class="plate-id">
+      <span class="plate-model">4100</span>
+      <span class="plate-kind">Character Generator<small>Unofficial Chyron 4100 emulator. Not affiliated with Chyron.</small></span>
+    </div>
+    <div class="plate-lamps">
+      <span class="lamp-group"><span class="lamp lamp-power lit" aria-hidden="true"></span>POWER</span>
+      <span class="lamp-group"><span class="lamp lamp-disk" id="diskLamp" aria-hidden="true"></span>DISK A</span>
+    </div>
+  </header>
+
+  <section class="monitors" aria-label="Monitors">
+    <figure class="monitor">
+      <figcaption><span class="lamp lamp-pvw lit" aria-hidden="true"></span>Preview <em>CH A</em></figcaption>
+      <div class="screen">
+        <canvas id="pvw" aria-label="Preview channel. Click to place the cursor, then type."></canvas>
+        <div class="dir" id="dir" hidden>
+          <div class="dir-head"><span>DIRECTORY  DISK A</span><span id="dirCount"></span></div>
+          <ol id="dirList"></ol>
+          <div class="dir-foot">↑↓ SELECT · ENTER READ · T READ+TAKE · DEL ERASE · ESC EXIT</div>
+        </div>
+      </div>
+      <div class="crt" aria-live="polite"><div id="st1"></div><div id="st2"></div></div>
+    </figure>
+    <figure class="monitor">
+      <figcaption><span class="lamp lamp-tally" id="tally" aria-hidden="true"></span>Program <em>ON AIR</em></figcaption>
+      <div class="screen"><canvas id="pgm" aria-label="Program output"></canvas></div>
+      <div class="crt"><div id="pst1"></div><div id="pst2"></div></div>
+    </figure>
+  </section>
+
+  <section class="console" aria-label="Keyboard">
+    <div class="keybank">
+      <div class="keygroup">
+        <h2>Disk</h2>
+        <div class="keys">
+          <button type="button" class="key" data-cmd="read"><b>Read</b><kbd>F1</kbd></button>
+          <button type="button" class="key" data-cmd="record"><b>Record</b><kbd>F2</kbd></button>
+          <button type="button" class="key" data-cmd="dir"><b>Dir</b><kbd>F4</kbd></button>
+          <button type="button" class="key" data-cmd="prev"><b>Prev Msg</b><kbd>PgUp</kbd></button>
+          <button type="button" class="key" data-cmd="next"><b>Next Msg</b><kbd>PgDn</kbd></button>
+          <button type="button" class="key" data-cmd="io"><b>Disk I/O</b><kbd>Ctrl O</kbd></button>
+        </div>
+      </div>
+      <div class="keygroup">
+        <h2>Compose</h2>
+        <div class="keys">
+          <button type="button" class="key key-f" data-cmd="font"><b>Font</b><kbd>F5</kbd></button>
+          <button type="button" class="key key-f" data-cmd="color"><b>Color</b><kbd>F6</kbd></button>
+          <button type="button" class="key key-f" data-cmd="edge"><b>Edge</b><kbd>F7</kbd></button>
+          <button type="button" class="key key-f" data-cmd="box"><b>Box</b><kbd>F8</kbd></button>
+          <button type="button" class="key key-f" data-cmd="just"><b>Justify</b><kbd>F9</kbd></button>
+          <button type="button" class="key key-f" data-cmd="mode"><b>Roll / Crawl</b><kbd>F10</kbd></button>
+          <button type="button" class="key key-f" data-cmd="scope"><b>Scope</b><kbd>Ctrl E</kbd></button>
+          <button type="button" class="key key-f" data-cmd="undo"><b>Undo</b><kbd>Ctrl Z</kbd></button>
+          <button type="button" class="key key-f" data-cmd="erase"><b>Erase Page</b><kbd>F3</kbd></button>
+        </div>
+      </div>
+      <div class="keygroup">
+        <h2>Output</h2>
+        <div class="keys">
+          <button type="button" class="key key-take" data-cmd="take"><b>Take</b><kbd>Ctrl ↵</kbd></button>
+          <button type="button" class="key" data-cmd="clear"><b>Clear Pgm</b><kbd>Ctrl Del</kbd></button>
+          <button type="button" class="key key-latch" data-cmd="trans"><b>Mix</b><kbd>Ctrl M</kbd></button>
+          <button type="button" class="key key-latch" data-cmd="hold"><b>Hold</b><kbd>Ctrl Space</kbd></button>
+          <button type="button" class="key" data-cmd="bkg"><b>Bkgd</b><kbd>Ctrl B</kbd></button>
+          <button type="button" class="key" data-cmd="image"><b>Load Image</b><kbd>file</kbd></button>
+          <button type="button" class="key key-latch" data-cmd="safe"><b>Safe Area</b><kbd>Ctrl G</kbd></button>
+        </div>
+      </div>
+    </div>
+
+    <aside class="attrs" aria-label="Attributes">
+      <div class="attr-block">
+        <h2>Fonts</h2>
+        <div class="font-list" id="fontList"></div>
+      </div>
+      <div class="attr-block">
+        <h2>Palette</h2>
+        <div class="seg" role="group" aria-label="Palette target">
+          <button type="button" data-target="face">Face</button>
+          <button type="button" data-target="edge">Edge</button>
+          <button type="button" data-target="box">Box</button>
+        </div>
+        <div class="swatches" id="swatches"></div>
+      </div>
+      <div class="attr-grid">
+        <div class="attr-block">
+          <h2>Edge</h2>
+          <div class="seg seg-wrap" role="group" aria-label="Edge">
+            <button type="button" data-edge="0">None</button>
+            <button type="button" data-edge="1">Shadow</button>
+            <button type="button" data-edge="2">Border</button>
+            <button type="button" data-edge="3">Bdr+Shd</button>
+            <button type="button" data-edge="4">Glow</button>
+          </div>
+        </div>
+        <div class="attr-block">
+          <h2>Apply to</h2>
+          <div class="seg" role="group" aria-label="Scope">
+            <button type="button" data-scope="cursor">Cursor</button>
+            <button type="button" data-scope="row">Row</button>
+            <button type="button" data-scope="page">Page</button>
+          </div>
+        </div>
+        <div class="attr-block">
+          <h2>Justify</h2>
+          <div class="seg" role="group" aria-label="Justify">
+            <button type="button" data-just="L">Left</button>
+            <button type="button" data-just="C">Center</button>
+            <button type="button" data-just="R">Right</button>
+          </div>
+        </div>
+        <div class="attr-block">
+          <h2>Box</h2>
+          <div class="seg" role="group" aria-label="Box">
+            <button type="button" data-boxmode="off">Off</button>
+            <button type="button" data-boxmode="fit">Fit</button>
+            <button type="button" data-boxmode="full">Full</button>
+          </div>
+        </div>
+        <div class="attr-block attr-wide">
+          <h2>Page motion</h2>
+          <div class="seg" role="group" aria-label="Page motion">
+            <button type="button" data-mode="static">Static</button>
+            <button type="button" data-mode="roll">Roll</button>
+            <button type="button" data-mode="crawl">Crawl</button>
+          </div>
+          <label class="speed" for="speed">Speed <input type="range" id="speed" min="1" max="9" step="1" value="3"><output id="speedOut">3</output></label>
+        </div>
+      </div>
+    </aside>
+  </section>
+
+  <footer class="help">
+    <p><b>Type</b> to write on the preview. <b>Arrows</b> move, <b>Shift+←/→</b> selects, <b>Enter</b> starts a new row, <b>Tab</b> jumps rows, <b>Ctrl+arrows</b> position the row (add Shift for bigger steps). Function keys ask for a number on the status line: type it and press <b>Enter</b>, or <b>Esc</b> to cancel.</p>
+    <p>Messages are numbered 0001 to 9999 and saved on disk A in this browser. Sample messages 1001 to 1006 are fictional.</p>
+  </footer>
+</div>
+
+<textarea id="trap" aria-label="Keyboard input for the preview channel" autocapitalize="off" autocomplete="off" autocorrect="off" spellcheck="false"></textarea>
+<input type="file" id="bgFile" accept="image/*" hidden>
+
+<dialog id="io" aria-labelledby="ioTitle">
+  <form method="dialog" class="io-form" onsubmit="return false">
+    <h2 id="ioTitle">Disk A</h2>
+    <p id="ioNote" class="io-note"></p>
+    <label for="ioText" class="io-label">Disk contents (JSON)</label>
+    <textarea id="ioText" spellcheck="false"></textarea>
+    <div class="io-actions">
+      <button type="button" id="ioCopy">Copy</button>
+      <button type="button" id="ioDownload">Download</button>
+      <label class="io-file">Open file<input type="file" id="ioFile" accept=".json,application/json"></label>
+      <button type="button" id="ioImport" class="io-primary">Import</button>
+      <button type="button" id="ioReset">Restore samples</button>
+      <button type="button" id="ioClose">Close</button>
+    </div>
+  </form>
+</dialog>
+
+<script src="chyron.js"></script>
+</body>
+</html>
