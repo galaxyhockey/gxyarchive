@@ -1,3 +1,21 @@
+/* ITC Korinna, used by fonts 1-4. Not shipped: an installed copy is used
+   first, then files dropped into fonts/ (git-ignored, see fonts/README.md).
+   Files loaded in the page with Load Fonts are added from script. */
+@font-face {
+  font-family: "CG Korinna";
+  font-weight: 400;
+  src: local("ITC Korinna LT Regular"), local("KorinnaLT-Regular"), local("ITC Korinna Regular"),
+       local("Korinna-Regular"), local("KorinnaITCbyBT-Regular"), local("KorinnaStd-Regular"),
+       url("fonts/korinna-regular.otf") format("opentype");
+}
+@font-face {
+  font-family: "CG Korinna";
+  font-weight: 700;
+  src: local("ITC Korinna LT Bold"), local("KorinnaLT-Bold"), local("ITC Korinna Bold"),
+       local("Korinna-Bold"), local("ITC Korinna Std Bold"), local("KorinnaStd-Bold"),
+       url("fonts/korinna-bold.otf") format("opentype");
+}
+
 /* Layout: an equipment rack. Nameplate, then preview and program monitors side
    by side, then the console (key bank + attribute panel). Stacks on phones.
    Deliberately single-theme: broadcast gear is dark in any room. */
@@ -268,6 +286,10 @@ button:focus-visible, input:focus-visible, .io-file:focus-within {
 .font-sample { font-size: 17px; line-height: 1.2; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .font-btn.on { border-color: var(--amber); background: #221c10; }
 .font-btn.on .font-n { color: var(--amber); }
+.font-btn.sub .font-size::after {
+  content: " SUB";
+  color: var(--amber);
+}
 
 .swatches {
   display: grid;

@@ -22,15 +22,20 @@
     ['MAROON', '#6e0f1f'], ['FOREST', '#0f4d2a'], ['GOLD', '#d4a72c'], ['SKY', '#7fc4ff'],
   ];
 
+  // ITC Korinna is the 4100-era broadcast face. It is commercial, so it is not
+  // shipped: the "CG Korinna" family resolves to an installed copy, files in
+  // fonts/ (see fonts/README.md), or files loaded with the Load Fonts key.
+  const KORINNA = 'CG Korinna';
+  const KORINNA_FALLBACK = 'Georgia, "Times New Roman", serif';
   const FONTS = [
-    { name: 'SANS BOLD',   family: 'Archivo',          weight: 700, size: 36 },
-    { name: 'SANS BLACK',  family: 'Archivo',          weight: 900, size: 56 },
-    { name: 'CONDENSED',   family: 'Barlow Condensed', weight: 600, size: 32 },
-    { name: 'COND X-BOLD', family: 'Barlow Condensed', weight: 800, size: 46 },
-    { name: 'GOTHIC',      family: 'Oswald',           weight: 600, size: 40 },
-    { name: 'DISPLAY',     family: 'Anton',            weight: 400, size: 68 },
-    { name: 'SLAB',        family: 'Roboto Slab',      weight: 700, size: 34, fallback: 'Georgia, serif' },
-    { name: 'SANS SMALL',  family: 'Archivo',          weight: 400, size: 24 },
+    { name: 'KORINNA BD',   family: KORINNA,            weight: 700, size: 36, fallback: KORINNA_FALLBACK },
+    { name: 'KORINNA BD',   family: KORINNA,            weight: 700, size: 56, fallback: KORINNA_FALLBACK },
+    { name: 'KORINNA',      family: KORINNA,            weight: 400, size: 32, fallback: KORINNA_FALLBACK },
+    { name: 'KORINNA',      family: KORINNA,            weight: 400, size: 24, fallback: KORINNA_FALLBACK },
+    { name: 'COND X-BOLD',  family: 'Barlow Condensed', weight: 800, size: 46 },
+    { name: 'GOTHIC',       family: 'Oswald',           weight: 600, size: 40 },
+    { name: 'DISPLAY',      family: 'Anton',            weight: 400, size: 68 },
+    { name: 'SANS BOLD',    family: 'Archivo',          weight: 700, size: 30 },
   ];
 
   const EDGES = ['NONE', 'SHADOW', 'BORDER', 'BDR+SHD', 'GLOW'];
@@ -95,39 +100,39 @@
     const at = new Date().toISOString();
     const pages = {
       1001: mkPage([
-        { t: 'GALAXY', f: 5, c: 14, e: 3, dy: 92 },
-        { t: 'HOCKEY', f: 5, c: 1, e: 3 },
-        { t: 'LIVE FROM ORION ARENA', f: 2, c: 6, e: 1, dy: 8 },
+        { t: 'GALAXY', f: 1, c: 14, e: 3, dy: 110 },
+        { t: 'HOCKEY', f: 1, c: 1, e: 3 },
+        { t: 'Live from Orion Arena', f: 2, c: 6, e: 1, dy: 8 },
       ]),
       1002: mkPage([
-        { t: '#17  MAREK VOLKOV', f: 3, c: 1, e: 1, just: 'L', dy: 286, box: { c: 11, full: true } },
-        { t: 'CENTER  ·  ORION ASTROS  ·  22 G 31 A', f: 7, c: 14, e: 0, just: 'L', box: { c: 12, full: true } },
+        { t: '#17  Marek Volkov', f: 0, c: 1, e: 1, just: 'L', dy: 296, box: { c: 11, full: true } },
+        { t: 'Center  ·  Orion Astros  ·  22 G  31 A', f: 3, c: 14, e: 0, just: 'L', box: { c: 12, full: true } },
       ]),
       1003: mkPage([
-        { t: 'ASTROS  3    COMETS  2', f: 4, c: 1, e: 2, dy: 6, box: { c: 9, full: false } },
-        { t: 'END OF 2ND PERIOD', f: 2, c: 5, e: 1, box: { c: 9, full: false } },
+        { t: 'ASTROS  3    COMETS  2', f: 0, c: 1, e: 2, dy: 6, box: { c: 9, full: false } },
+        { t: 'End of 2nd Period', f: 2, c: 5, e: 1, box: { c: 9, full: false } },
       ]),
       1004: mkPage([
-        { t: 'GALAXY HOCKEY', f: 1, c: 14, e: 2 },
-        { t: '', f: 7 },
-        { t: 'PLAY-BY-PLAY', f: 7, c: 15, e: 1 },
-        { t: 'DANA RUIZ', f: 3, c: 1, e: 1 },
-        { t: '', f: 7 },
-        { t: 'COLOR ANALYST', f: 7, c: 15, e: 1 },
-        { t: 'TEODOR NIEMI', f: 3, c: 1, e: 1 },
-        { t: '', f: 7 },
-        { t: 'CHARACTER GENERATOR', f: 7, c: 15, e: 1 },
-        { t: 'CG-4100 EMULATOR', f: 3, c: 1, e: 1 },
-        { t: '', f: 7 },
-        { t: 'THANKS FOR WATCHING', f: 4, c: 5, e: 3 },
+        { t: 'Galaxy Hockey', f: 1, c: 14, e: 2 },
+        { t: '', f: 3 },
+        { t: 'Play-by-Play', f: 3, c: 15, e: 1 },
+        { t: 'Dana Ruiz', f: 0, c: 1, e: 1 },
+        { t: '', f: 3 },
+        { t: 'Color Analyst', f: 3, c: 15, e: 1 },
+        { t: 'Teodor Niemi', f: 0, c: 1, e: 1 },
+        { t: '', f: 3 },
+        { t: 'Character Generator', f: 3, c: 15, e: 1 },
+        { t: 'CG-4100 Emulator', f: 0, c: 1, e: 1 },
+        { t: '', f: 3 },
+        { t: 'Thanks for Watching', f: 0, c: 5, e: 3 },
       ], 'roll', 2),
       1005: mkPage([
-        { t: 'LEAGUE WIRE:  COMETS RECALL G PAVEL SIRO FROM VEGA  ·  ASTROS PP 3 FOR 4 TONIGHT  ·  NEXT: ASTROS AT NOVAS, SATURDAY 7:05  ·',
+        { t: 'LEAGUE WIRE:  Comets recall G Pavel Siro from Vega  ·  Astros PP 3 for 4 tonight  ·  Next: Astros at Novas, Saturday 7:05  ·',
           f: 2, c: 1, e: 1, just: 'L', dy: 354, box: { c: 12, full: true } },
       ], 'crawl', 4),
       1006: mkPage([
-        { t: 'PENALTY', f: 3, c: 5, e: 1, just: 'R', dy: 300, box: { c: 2, full: false } },
-        { t: 'VOLKOV  ·  HOOKING  2:00', f: 2, c: 1, e: 1, just: 'R', box: { c: 9, full: false } },
+        { t: 'PENALTY', f: 0, c: 5, e: 1, just: 'R', dy: 300, box: { c: 2, full: false } },
+        { t: 'Volkov  ·  Hooking  2:00', f: 2, c: 1, e: 1, just: 'R', box: { c: 9, full: false } },
       ]),
     };
     const disk = {};
@@ -856,6 +861,7 @@
       pvwDirty = pgmDirty = true; flash(`BACKGROUND ${bkg}`);
     },
     image: () => $('#bgFile').click(),
+    fonts: () => $('#fontFile').click(),
     safe: () => { ed.safe = !ed.safe; dirty(); flash(ed.safe ? 'SAFE AREA ON' : 'SAFE AREA OFF'); },
     undo,
     scope: () => {
@@ -1022,6 +1028,72 @@
     e.target.value = '';
   });
 
+  // ---- Korinna font files ------------------------------------------------------------------
+  // Files loaded here are registered as "CG Korinna" and kept in this browser's
+  // IndexedDB, so they only need loading once.
+  const FONT_DB = 'cg4100-fonts';
+  function fontStore(mode, fn) {
+    return new Promise((resolve, reject) => {
+      let req;
+      try { req = indexedDB.open(FONT_DB, 1); } catch (err) { reject(err); return; }
+      req.onupgradeneeded = () => req.result.createObjectStore('faces');
+      req.onerror = () => reject(req.error);
+      req.onsuccess = () => {
+        const tx = req.result.transaction('faces', mode);
+        const out = fn(tx.objectStore('faces'));
+        tx.oncomplete = () => resolve(out && out.result);
+        tx.onerror = () => reject(tx.error);
+      };
+    });
+  }
+  async function addKorinna(buffer, weight) {
+    const face = new FontFace(KORINNA, buffer, { weight: String(weight) });
+    await face.load();
+    document.fonts.add(face);
+  }
+  async function restoreFonts() {
+    try {
+      const faces = await fontStore('readonly', (st) => st.getAll());
+      for (const f of faces || []) await addKorinna(f.buffer, f.weight).catch(() => null);
+    } catch (_) { /* IndexedDB unavailable: fall back to installed or local files */ }
+  }
+  // Canvas text silently substitutes a missing face, so compare widths against
+  // the fallback to tell whether real Korinna is present.
+  function korinnaPresent(weight) {
+    const probe = 'Korinna 4100 WMQ gxy';
+    measure.font = `${weight} 40px monospace`;
+    const a = measure.measureText(probe).width;
+    measure.font = `${weight} 40px "${KORINNA}", monospace`;
+    return Math.abs(measure.measureText(probe).width - a) > 0.5;
+  }
+  function markSubstitutes() {
+    const have = { 400: korinnaPresent(400), 700: korinnaPresent(700) };
+    document.querySelectorAll('[data-font]').forEach((b) => {
+      const F = FONTS[+b.dataset.font];
+      const sub = F.family === KORINNA && !have[F.weight];
+      b.classList.toggle('sub', sub);
+      b.title = sub ? 'ITC Korinna not loaded: showing a substitute. Use Load Fonts.' : '';
+    });
+    return have[400] && have[700];
+  }
+  $('#fontFile').addEventListener('change', async (e) => {
+    const files = [...e.target.files];
+    e.target.value = '';
+    const loaded = [];
+    for (const file of files) {
+      const weight = /bold|black|heavy|demi/i.test(file.name) ? 700 : 400;
+      try {
+        const buffer = await file.arrayBuffer();
+        await addKorinna(buffer, weight);
+        loaded.push(weight === 700 ? 'BOLD' : 'REGULAR');
+        await fontStore('readwrite', (st) => st.put({ buffer, weight, name: file.name }, weight)).catch(() => null);
+      } catch (_) {
+        flash(`COULD NOT READ ${file.name.toUpperCase()}`);
+      }
+    }
+    if (loaded.length) { relayout(); markSubstitutes(); flash(`KORINNA ${[...new Set(loaded)].join(' + ')} LOADED`); }
+  });
+
   // ---- Disk import / export ----------------------------------------------------------------
   const ioText = $('#ioText'), ioNote = $('#ioNote');
   function openIO() {
@@ -1091,8 +1163,13 @@
   if (!readMsg(1001, true)) readMsg(diskNums()[0] || 1001, true);
   flash('READY. TYPE TO EDIT PREVIEW, F2 RECORDS, CTRL+ENTER TAKES');
   if (document.fonts) {
-    Promise.all(FONTS.map((_, i) => document.fonts.load(fontCss(i)).catch(() => null))).then(relayout);
-    document.fonts.addEventListener && document.fonts.addEventListener('loadingdone', relayout);
+    restoreFonts()
+      .then(() => Promise.all(FONTS.map((_, i) => document.fonts.load(fontCss(i)).catch(() => null))))
+      .then(() => {
+        relayout();
+        if (!markSubstitutes()) flash('KORINNA NOT LOADED. PRESS LOAD FONTS');
+      });
+    document.fonts.addEventListener && document.fonts.addEventListener('loadingdone', () => { relayout(); markSubstitutes(); });
   }
   requestAnimationFrame(frame);
 })();

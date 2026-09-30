@@ -1,0 +1,5 @@
+# Commercial font files (ITC Korinna) must not be committed
+*.otf
+*.ttf
+*.woff
+*.woff2

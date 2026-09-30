@@ -53,6 +53,7 @@
           <button type="button" class="key" data-cmd="prev"><b>Prev Msg</b><kbd>PgUp</kbd></button>
           <button type="button" class="key" data-cmd="next"><b>Next Msg</b><kbd>PgDn</kbd></button>
           <button type="button" class="key" data-cmd="io"><b>Disk I/O</b><kbd>Ctrl O</kbd></button>
+          <button type="button" class="key" data-cmd="fonts"><b>Load Fonts</b><kbd>.otf .ttf</kbd></button>
         </div>
       </div>
       <div class="keygroup">
@@ -148,11 +149,13 @@
   <footer class="help">
     <p><b>Type</b> to write on the preview. <b>Arrows</b> move, <b>Shift+←/→</b> selects, <b>Enter</b> starts a new row, <b>Tab</b> jumps rows, <b>Ctrl+arrows</b> position the row (add Shift for bigger steps). Function keys ask for a number on the status line: type it and press <b>Enter</b>, or <b>Esc</b> to cancel.</p>
     <p>Messages are numbered 0001 to 9999 and saved on disk A in this browser. Sample messages 1001 to 1006 are fictional.</p>
+    <p>Fonts 1 to 4 are ITC Korinna, the classic 4100-era broadcast face. It is a commercial font, so it is not included. Press <b>Load Fonts</b> and pick your Korinna regular and bold files (.otf or .ttf); they stay in this browser. Until then a marked substitute is shown.</p>
   </footer>
 </div>
 
 <textarea id="trap" aria-label="Keyboard input for the preview channel" autocapitalize="off" autocomplete="off" autocorrect="off" spellcheck="false"></textarea>
 <input type="file" id="bgFile" accept="image/*" hidden>
+<input type="file" id="fontFile" accept=".otf,.ttf,.woff,.woff2,font/otf,font/ttf,font/woff,font/woff2" multiple hidden>
 
 <dialog id="io" aria-labelledby="ioTitle">
   <form method="dialog" class="io-form" onsubmit="return false">

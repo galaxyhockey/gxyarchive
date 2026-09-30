@@ -10,8 +10,19 @@ the original hardware or its disk format.
 
 ## Running
 
-Open `index.html` in a browser. No build step or server is needed. Fonts load
-from Google Fonts and fall back to system faces when offline.
+Open `index.html` in a browser. No build step or server is needed.
+
+## Fonts
+
+Fonts 1 to 4 are ITC Korinna, the classic 4100-era broadcast face (Korinna
+Bold 36 and 56, Korinna 32 and 24). Korinna is commercial, so it is not in this
+repository. Supply your own licensed copy by installing it, copying it into
+`fonts/`, or pressing **Load Fonts** in the page; see
+[`fonts/README.md`](fonts/README.md). Until then those slots are marked `SUB`
+and drawn in Georgia.
+
+Fonts 5 to 8 are free stand-ins from Google Fonts for the 4100's condensed,
+gothic, display and sans faces. They fall back to system faces when offline.
 
 ## Keys
 
@@ -30,6 +41,7 @@ from Google Fonts and fall back to system faces when offline.
 | Ctrl+Enter / Ctrl+Delete | Take preview to air / clear program |
 | Ctrl+M · Ctrl+Space | Toggle cut/mix · hold a roll or crawl |
 | Ctrl+B · Ctrl+G · Ctrl+Z · Ctrl+O | Background · safe area · undo · disk import/export |
+| Load Fonts key | Load Korinna regular and bold files into this browser |
 
 The disk is stored in the browser's localStorage. Use Disk I/O to back it up as
 JSON or to import one. Sample messages 1001-1006 (title, lower third, score,
